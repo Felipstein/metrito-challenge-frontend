@@ -1,14 +1,18 @@
 import React from 'react';
 
-import { ResumedOrderItemProps } from './types';
-import * as S from './styles';
 import { Text } from '../../../../components/Text';
 import { CalendarIcon } from '../../../../icons/CalendarIcon';
 import { TagStatus } from '../../../../components/TagStatus';
 import { transactionStatusColor, transactionStatusLabel } from '../../../../types/TransactionStatus';
 import { paymentTypeLabel } from '../../../../types/PaymentType';
+import { formatCurrency } from '../../../../utils/FormatCurrency';
+
+import { ResumedOrderItemProps } from './types';
+import * as S from './styles';
 
 export const ResumedOrderItem: React.FC<ResumedOrderItemProps> = ({ resumedOrderData }) => {
+  console.log(resumedOrderData);
+
   return (
     <S.Container>
       <div className="main-infos">
@@ -74,7 +78,7 @@ export const ResumedOrderItem: React.FC<ResumedOrderItemProps> = ({ resumedOrder
 
         <div className="payment-type-and-value">
           <Text size='lg'>
-            {Intl.NumberFormat('pt-br', { style: 'currency', currency: resumedOrderData.transaction.currency_code }).format(resumedOrderData.transaction.value)}
+            {formatCurrency(resumedOrderData.transaction.value, resumedOrderData.transaction.currency_code)}
           </Text>
 
           <TagStatus
