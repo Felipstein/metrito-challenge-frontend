@@ -1,6 +1,8 @@
 import React, { createContext, ReactNode, useContext, useState } from 'react';
+import { ThemeProvider } from 'styled-components';
 
-import { Theme } from '../styles/themes';
+import { Theme, themes } from '../styles/themes';
+import light from '../styles/themes/light';
 
 export interface CurrentThemeContextProps {
   currentTheme:  Theme;
@@ -28,10 +30,12 @@ export const CurrentThemeProvider: React.FC<CurrentThemeProviderProps> = ({ chil
   }
 
   return (
-    <CurrentThemeContext.Provider value={{ currentTheme, toggleTheme }}>
-      {children}
-    </CurrentThemeContext.Provider>
+    <ThemeProvider theme={themes[currentTheme] || light}>
+      <CurrentThemeContext.Provider value={{ currentTheme, toggleTheme }}>
+        {children}
+      </CurrentThemeContext.Provider>
+    </ThemeProvider>
   );
 };
 
-export const useCurrentTheme = useContext(CurrentThemeContext);
+export const useCurrentTheme = () => useContext(CurrentThemeContext);
