@@ -45,7 +45,7 @@ export default {
 
       tag: {
         text: gray[400],
-        background: softblue[800],
+        background: softblue[600],
       },
 
       scrollbar: softblue[600],
