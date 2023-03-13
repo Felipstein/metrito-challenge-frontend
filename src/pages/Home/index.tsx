@@ -1,20 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Input } from '../../components/Input';
 import { SelectInput } from '../../components/SelectInput';
 import { Tag } from '../../components/Tag';
-import { Order } from '../../types/Order';
+import { ResumedOrder } from '../../types/ResumedOrder';
+import { ResumedOrdersResonse } from '../../types/ResumedOrdersResponse';
 import { TransactionTag } from '../../types/TransactionTag';
 import { StringUtils } from '../../utils/StringUtils';
+import { ResumedOrderItem } from './components/ResumedOrderItem';
 
 import * as S from './styles';
 
 export const Home: React.FC = () => {
   const [search, setSearch] = useState('');
   const [maxPerPage, setMaxPerPage] = useState(25);
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [startDate, setStartDate] = useState('2021-04-01');
+  const [endDate, setEndDate] = useState('2021-05-30');
 
-  const [orders, setOrders] = useState<Order[]>([]);
+  const [resumedOrders, setResumedOrders] = useState<ResumedOrder[]>([]);
+
+  useEffect(() => {
+    async function fetchData() {
+
+      const responseData = await fetch(`http://localhost:3333/v1/orders?start_date=${startDate}&end_date=${endDate}`);
+
+      const response = await responseData.json() as ResumedOrdersResonse;
+
+      console.log(response);
+
+      setResumedOrders(response.data);
+
+    }
+
+    fetchData();
+
+  }, []);
 
   const [transactionTags, setTransactionTags] = useState<TransactionTag[]>([
     { total: 25, status: 'APROVADA' },
@@ -143,11 +162,22 @@ export const Home: React.FC = () => {
         </div>
       </S.HeaderContainer>
 
+      <S.ResumedOrderItensContainer>
+        <S.ResumedOrderItensList>
+          {resumedOrders.map(resumedOrder => (
+            <ResumedOrderItem
+              key={resumedOrder.identification.order_id}
+              resumedOrderData={resumedOrder}
+            />
+          ))}
+        </S.ResumedOrderItensList>
+      </S.ResumedOrderItensContainer>
+
       <S.FooterContainer>
         <div className="pagination-info">
           <div className="products-info">
             <span>
-              Exibindo <strong>25</strong> produtos de <strong>95</strong>.
+              Exibindo <strong>{resumedOrders.length}</strong> produtos.
             </span>
           </div>
 

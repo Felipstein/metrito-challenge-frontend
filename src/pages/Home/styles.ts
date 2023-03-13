@@ -55,6 +55,10 @@ export const HeaderContainer = styled.header`
   }
 `;
 
+export const ResumedOrderItensContainer = styled.div``;
+
+export const ResumedOrderItensList = styled.ul``;
+
 export const FooterContainer = styled.footer`
   width: 100%;
 
