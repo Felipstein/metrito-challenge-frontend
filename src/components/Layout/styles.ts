@@ -9,5 +9,13 @@ export const LayoutPage = styled.div`
 
   .content {
     flex: 1;
+
+    margin: 4rem auto;
+
+    max-width: 144rem;
+    width: 84vw;
+
+    height: 80%;
+    max-height: 144rem;
   }
 `;
