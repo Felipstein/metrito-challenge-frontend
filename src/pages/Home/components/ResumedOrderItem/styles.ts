@@ -1,7 +1,10 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Text } from '../../../../components/Text';
 
-export const Container = styled.li`
+export const Container = styled(Link)`
+  text-decoration: none;
+
   display: flex;
   align-items: center;
   justify-content: space-between;

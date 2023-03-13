@@ -1,19 +1,19 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { ScaleLoader } from 'react-spinners';
+import React, { useMemo, useState } from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import { Navigate, NavigationType } from 'react-router-dom';
 import FadeLoader from 'react-spinners/FadeLoader';
-import MoonLoader from 'react-spinners/MoonLoader';
 import { useTheme } from 'styled-components';
+
 import { Input } from '../../components/Input';
-import { SelectInput } from '../../components/SelectInput';
 import { Tag } from '../../components/Tag';
 import { Text } from '../../components/Text';
-import { useCurrentTheme } from '../../contexts/CurrentThemeContext';
+import { useFetchData } from '../../hooks/useFetchData';
+import { CactusIcon } from '../../icons/CactusIcon';
 import { SadIcon } from '../../icons/SadIcon';
-import { ResumedOrder } from '../../types/ResumedOrder';
-import { ResumedOrdersResonse } from '../../types/ResumedOrdersResponse';
+import { ResumedOrdersResponse } from '../../types/ResumedOrdersResponse';
 import { TransactionStatus, transactionStatusLabel } from '../../types/TransactionStatus';
 import { TransactionTag } from '../../types/TransactionTag';
-import { StringUtils } from '../../utils/StringUtils';
+
 import { ResumedOrderItem } from './components/ResumedOrderItem';
 
 import * as S from './styles';
@@ -22,17 +22,31 @@ export const Home: React.FC = () => {
   const theme = useTheme();
 
   const [search, setSearch] = useState('');
-  const [maxPerPage, setMaxPerPage] = useState(25);
   const [startDate, setStartDate] = useState('2021-04-01');
   const [endDate, setEndDate] = useState('2021-05-30');
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const { data, errorFeedback, isFetching } = useFetchData<ResumedOrdersResponse>(`http://localhost:3333/v1/orders?start_date=${startDate}&end_date=${endDate}`);
 
-  const [resumedOrders, setResumedOrders] = useState<ResumedOrder[]>([]);
+  const resumedOrders = useMemo(() => data?.data, [data]);
+
+  const resumedOrdersFiltered = useMemo(() => {
+    if(!resumedOrders) {
+      return [];
+    }
+
+    if(!search) {
+      return resumedOrders;
+    }
+
+    return resumedOrders.filter(resumedOrder => resumedOrder.product?.name.toLowerCase().includes(search.toLowerCase()));
+  }, [search, resumedOrders]);
 
   // Atualiza as tags de transações conforme os pedidos forem atualizando também.
   const transactionTags = useMemo<TransactionTag[]>(() => {
+
+    if(!resumedOrders) {
+      return [];
+    }
 
     const transactionsStatusTotal = new Map<TransactionStatus, number>();
 
@@ -56,47 +70,10 @@ export const Home: React.FC = () => {
     return transactionTags;
   }, [resumedOrders]);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        setError(null);
-        setIsLoading(true);
-
-        const responseData = await fetch(`http://localhost:3333/v1/orders?start_date=${startDate}&end_date=${endDate}`);
-
-        const response = await responseData.json() as ResumedOrdersResonse;
-
-        throw new Error('Falhou');
-
-        setResumedOrders(response.data);
-      } catch(err: Error | any) {
-        setError(err.message);
-      } finally {
-        setIsLoading(false);
-      }
-
-    }
-
-    fetchData();
-
-  }, []);
-
   function handleSearchChange(event: React.ChangeEvent<HTMLInputElement>) {
     const value = event.target.value;
 
     setSearch(value);
-  }
-
-  function handleMaxPerPageChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const value = event.target.value;
-
-    let maxPerPage = StringUtils.removeAllNoDigitChar(value);
-
-    if(maxPerPage > 1000) {
-      maxPerPage = 1000;
-    }
-
-    setMaxPerPage(maxPerPage);
   }
 
   function handleStartDateChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -129,20 +106,9 @@ export const Home: React.FC = () => {
             <Input
               name='search'
               type='text'
-              placeholder='Buscar por nome, preço, produto...'
+              placeholder='Buscar por nome de produto...'
               value={search}
               onChange={handleSearchChange}
-            />
-          </div>
-
-          <div className="max-results-input">
-            <Input
-              name='max-results'
-              type='text'
-              label='Máx. de produtos p/ pág.'
-              small
-              value={maxPerPage}
-              onChange={handleMaxPerPageChange}
             />
           </div>
 
@@ -158,26 +124,6 @@ export const Home: React.FC = () => {
 
         <div className="filters">
           <div className="filter-group">
-            <SelectInput
-              name='transaction-status'
-              label='Status da Transação'
-            >
-              <option>Todos</option>
-              <option>2</option>
-              <option>3</option>
-            </SelectInput>
-
-            <SelectInput
-              name='payment-type'
-              label='Tipo de Pagamento'
-            >
-              <option>Teste</option>
-              <option>2</option>
-              <option>3</option>
-            </SelectInput>
-          </div>
-
-          <div className="filter-group">
             <Input
               name='start-date'
               type="date"
@@ -185,6 +131,7 @@ export const Home: React.FC = () => {
               placeholder='dd/mm/aaaa'
               value={startDate}
               onChange={handleStartDateChange}
+              disabled
             />
 
             <Input
@@ -194,12 +141,13 @@ export const Home: React.FC = () => {
               placeholder='dd/mm/aaaa'
               value={endDate}
               onChange={handleEndDateChange}
+              disabled
             />
           </div>
         </div>
       </S.HeaderContainer>
 
-      {!isLoading && error && (
+      {!isFetching && errorFeedback && (
         <S.FailedToFetch>
           <SadIcon size={48} />
           <Text>
@@ -208,15 +156,17 @@ export const Home: React.FC = () => {
         </S.FailedToFetch>
       )}
 
-      {isLoading ? (
+      {isFetching && (
         <div className="content-loader">
           <Text className='loading-feedback'>Buscando Pedidos...</Text>
           <FadeLoader color={theme.anatomy.colors.homePage.mainTexts} />
         </div>
-      ) : (
+      )}
+
+      {!isFetching && !errorFeedback && resumedOrdersFiltered && resumedOrdersFiltered.length > 0 && (
         <S.ResumedOrderItensContainer>
           <S.ResumedOrderItensList>
-            {resumedOrders.map(resumedOrder => (
+            {resumedOrdersFiltered.map(resumedOrder => (
               <ResumedOrderItem
                 key={resumedOrder.identification.order_id}
                 resumedOrderData={resumedOrder}
@@ -226,34 +176,27 @@ export const Home: React.FC = () => {
         </S.ResumedOrderItensContainer>
       )}
 
+      {!isFetching && !errorFeedback && resumedOrdersFiltered && resumedOrdersFiltered.length === 0 && (
+        <S.EmptyList>
+          <CactusIcon size={48} />
+          <Text>
+            Nenhum pedido encontrado...
+          </Text>
+        </S.EmptyList>
+      )}
+
       <S.FooterContainer>
-        <div className="pagination-info">
-          <div className="products-info">
-            <span>
-              Exibindo <strong>{resumedOrders.length}</strong> produtos.
-            </span>
-          </div>
-
-          <div className="pages-info">
-            <span>
-              Página <strong>1</strong> de <strong>4</strong>.
-            </span>
-          </div>
-        </div>
-
-        <div className="pagination-actions">
-          <button
-            type='button'
-          >
-            {'<'}
-          </button>
-
-          <button
-            type='button'
-          >
-            {'>'}
-          </button>
-        </div>
+        {!isFetching && !errorFeedback && resumedOrdersFiltered && resumedOrdersFiltered.length > 0 && (
+          <>
+            <div className="pagination-info">
+              <div className="products-info">
+                <span>
+                  Exibindo <strong>{resumedOrdersFiltered.length}</strong> produtos.
+                </span>
+              </div>
+            </div>
+          </>
+        )}
       </S.FooterContainer>
     </S.Container>
   );

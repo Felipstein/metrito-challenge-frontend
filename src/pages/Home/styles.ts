@@ -124,3 +124,16 @@ export const FailedToFetch = styled.div`
 
   min-height: 25rem;
 `;
+
+export const EmptyList = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+
+  font-weight: 700;
+  color: ${({ theme }) => theme.anatomy.colors.homePage.mainTexts};
+
+  min-height: 25rem;
+`;

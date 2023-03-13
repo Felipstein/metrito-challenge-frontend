@@ -12,7 +12,7 @@ import * as S from './styles';
 
 export const ResumedOrderItem: React.FC<ResumedOrderItemProps> = ({ resumedOrderData }) => {
   return (
-    <S.Container>
+    <S.Container to={`/order/${resumedOrderData.identification.order_id}`}>
       <div className="main-infos">
         <Text className='data-source' size='lg'>
           {/* Tranforma o valor retornado de "EXEMPLO" para "Exemplo" */}
