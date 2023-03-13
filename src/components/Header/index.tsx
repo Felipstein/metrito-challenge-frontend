@@ -1,4 +1,5 @@
 import React from 'react';
+import { ToggleThemeButton } from '../ToggleThemeButton';
 
 import * as S from './styles';
 
@@ -8,7 +9,8 @@ export const Header: React.FC = () => {
     <S.HeaderContainer>
       <div className="top-header">
         <h1>Analise de Dados</h1>
-        <button>Trocar tema</button>
+
+        <ToggleThemeButton />
       </div>
 
       <S.NavBar>

@@ -24,6 +24,11 @@ export default createGlobalStyle`
     min-height: 100%;
   }
 
+  button, input {
+    font-size: ${({ theme }) => theme.typograph.size.md};
+    color: ${({ theme }) => theme.anatomy.colors.text};
+  }
+
   h1 {
     font-size: ${({ theme }) => theme.typograph.heading.h1};
   }
