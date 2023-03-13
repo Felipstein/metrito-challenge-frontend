@@ -21,11 +21,6 @@ declare module 'styled-components' {
       };
     };
 
-    shadows: {
-      default: string;
-      inputFocused: string;
-    };
-
     colors: {
       gray: {
         25: string;
@@ -70,9 +65,24 @@ declare module 'styled-components' {
         50: string;
         600: string;
       };
+    };
 
-      // Cores relacionadas à anatomia do Design System. São valores que podem ser alterados na troca entre o tema Light e o Dark.
-      anatomy: {
+    animations: {
+      sh: string;
+      md: string;
+      lg: string;
+    };
+
+    // Tokens relacionadas à anatomia do Design System. São valores que podem ser alterados na troca entre o tema Light e o Dark.
+    anatomy: {
+      disabledOpacity: string;
+
+      shadows: {
+        default: string;
+        inputFocused: string;
+      };
+
+      colors: {
         primary: {
           lighter: string;
           light: string;
@@ -82,43 +92,112 @@ declare module 'styled-components' {
         };
 
         danger: {
-          main: string;
-          lighter: string;
+          text: string;
+          background: string;
         };
 
         green: {
-          main: string;
-          lighter: string;
+          text: string;
+          background: string;
         };
 
         cyan: {
-          main: string;
-          ligher: string;
+          text: string;
+          background: string;
         };
 
-        gray: {
-          lighter: string;
-          light: string;
-          main: string;
-          dark: string;
-          darker: string;
-          darkerx: string;
-        };
+        text: string;
+        background: string;
 
-        softblue: {
-          ligher: string;
-          light: string;
-          prelight: string;
-          main: string;
-          premain: string;
-          dark: string;
-          darkx: string;
-          darker: string;
-          darkerx: string;
+        input: {
+          label: string;
+          inputBorder: string;
+          placeholder: string;
+          background: string;
+
+          danger: string;
         }
-      }
-    };
 
+        scrollbar: string;
+
+        header: {
+          title: string;
+
+          topHeader: string;
+          navBar: string;
+        };
+
+        footer: {
+          text: string;
+          background: string;
+        };
+
+        tag: {
+          text: string;
+          background: string;
+        };
+
+        homePage: {
+          contentBackground: string;
+          contentHeaderBackground: string;
+          lightTexts: string;
+          mainTexts: string;
+          darkTexts: string;
+          blueTexts: string;
+          hoveredBackgroundItem: string;
+        }
+
+        orderInfoPage: {
+          ligherTexts: string;
+          lightTexts: string;
+          mainTexts: string;
+          contentBackground: string;
+          panelBackground: string;
+          blockInfoBackground: string;
+        };
+
+        button: {
+          primary: {
+            default: {
+              text: string;
+              background: string;
+            };
+            hovered: {
+              text: string;
+              background: string;
+            };
+            actived: {
+              text: string;
+              background: string;
+            };
+          };
+
+          secondary: {
+            default: {
+              text: string;
+              background: string;
+            };
+            hovered: {
+              text: string;
+              background: string;
+            };
+            actived: {
+              text: string;
+              background: string;
+            };
+          };
+
+          terciary: {
+            default: {
+              text: string;
+            };
+            hovered: {
+              text: string;
+            };
+          };
+        };
+      };
+    };
   }
 
 }
