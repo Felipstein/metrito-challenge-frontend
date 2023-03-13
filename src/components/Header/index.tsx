@@ -1,4 +1,5 @@
 import React from 'react';
+import { LinkButton } from '../LinkButton';
 import { ToggleThemeButton } from '../ToggleThemeButton';
 
 import * as S from './styles';
@@ -14,10 +15,21 @@ export const Header: React.FC = () => {
       </div>
 
       <S.NavBar>
-        <a href="">A</a>
-        <a href="">B</a>
-        <a href="">C</a>
-        <a href="">D</a>
+        <LinkButton to='https://github.com/Felipstein/metrito-challenge-backend'>
+          Repositório API
+        </LinkButton>
+
+        <LinkButton to='https://github.com/Felipstein/metrito-challenge-frontend'>
+          Repositório Web
+        </LinkButton>
+
+        <LinkButton to='https://www.figma.com/file/BjgpVRRLVhYN3tmw5sxux6/Metrito-Challenge-Layout?node-id=3%3A3306&t=Y2L8szlhTXWWbzJH-1'>
+          Projeto no Figma
+        </LinkButton>
+
+        <LinkButton to='https://metrito-challenge-api.onrender.com/api-docs'>
+          Doc da API
+        </LinkButton>
       </S.NavBar>
     </S.HeaderContainer>
   );
