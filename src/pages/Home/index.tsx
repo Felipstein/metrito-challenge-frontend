@@ -27,7 +27,7 @@ export const Home: React.FC = () => {
 
   const resumedOrders = useMemo(() => data?.data, [data]);
 
-  const resumedOrdersFilte   = useMemo(() => {
+  const resumedOrdersFiltered = useMemo(() => {
     if(!resumedOrders) {
       return [];
     }
