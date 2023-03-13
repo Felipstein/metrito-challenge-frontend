@@ -1,7 +1,14 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { ScaleLoader } from 'react-spinners';
+import FadeLoader from 'react-spinners/FadeLoader';
+import MoonLoader from 'react-spinners/MoonLoader';
+import { useTheme } from 'styled-components';
 import { Input } from '../../components/Input';
 import { SelectInput } from '../../components/SelectInput';
 import { Tag } from '../../components/Tag';
+import { Text } from '../../components/Text';
+import { useCurrentTheme } from '../../contexts/CurrentThemeContext';
+import { SadIcon } from '../../icons/SadIcon';
 import { ResumedOrder } from '../../types/ResumedOrder';
 import { ResumedOrdersResonse } from '../../types/ResumedOrdersResponse';
 import { TransactionStatus, transactionStatusLabel } from '../../types/TransactionStatus';
@@ -12,10 +19,15 @@ import { ResumedOrderItem } from './components/ResumedOrderItem';
 import * as S from './styles';
 
 export const Home: React.FC = () => {
+  const theme = useTheme();
+
   const [search, setSearch] = useState('');
   const [maxPerPage, setMaxPerPage] = useState(25);
   const [startDate, setStartDate] = useState('2021-04-01');
   const [endDate, setEndDate] = useState('2021-05-30');
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const [resumedOrders, setResumedOrders] = useState<ResumedOrder[]>([]);
 
@@ -46,14 +58,22 @@ export const Home: React.FC = () => {
 
   useEffect(() => {
     async function fetchData() {
+      try {
+        setError(null);
+        setIsLoading(true);
 
-      const responseData = await fetch(`http://localhost:3333/v1/orders?start_date=${startDate}&end_date=${endDate}`);
+        const responseData = await fetch(`http://localhost:3333/v1/orders?start_date=${startDate}&end_date=${endDate}`);
 
-      const response = await responseData.json() as ResumedOrdersResonse;
+        const response = await responseData.json() as ResumedOrdersResonse;
 
-      console.log(response);
+        throw new Error('Falhou');
 
-      setResumedOrders(response.data);
+        setResumedOrders(response.data);
+      } catch(err: Error | any) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
 
     }
 
@@ -179,16 +199,32 @@ export const Home: React.FC = () => {
         </div>
       </S.HeaderContainer>
 
-      <S.ResumedOrderItensContainer>
-        <S.ResumedOrderItensList>
-          {resumedOrders.map(resumedOrder => (
-            <ResumedOrderItem
-              key={resumedOrder.identification.order_id}
-              resumedOrderData={resumedOrder}
-            />
-          ))}
-        </S.ResumedOrderItensList>
-      </S.ResumedOrderItensContainer>
+      {!isLoading && error && (
+        <S.FailedToFetch>
+          <SadIcon size={48} />
+          <Text>
+            Ocorreu um erro enquanto buscavamos informações sobre os pedidos...
+          </Text>
+        </S.FailedToFetch>
+      )}
+
+      {isLoading ? (
+        <div className="content-loader">
+          <Text className='loading-feedback'>Buscando Pedidos...</Text>
+          <FadeLoader color={theme.anatomy.colors.homePage.mainTexts} />
+        </div>
+      ) : (
+        <S.ResumedOrderItensContainer>
+          <S.ResumedOrderItensList>
+            {resumedOrders.map(resumedOrder => (
+              <ResumedOrderItem
+                key={resumedOrder.identification.order_id}
+                resumedOrderData={resumedOrder}
+              />
+            ))}
+          </S.ResumedOrderItensList>
+        </S.ResumedOrderItensContainer>
+      )}
 
       <S.FooterContainer>
         <div className="pagination-info">

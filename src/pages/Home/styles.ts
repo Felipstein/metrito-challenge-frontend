@@ -5,6 +5,22 @@ export const Container = styled.main`
   border-radius: 8px;
 
   padding: 1.6rem;
+
+  .content-loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+
+    width: 100%;
+    min-height: 25rem;
+
+    .loading-feedback {
+      font-weight: 500;
+      color: ${({ theme }) => theme.anatomy.colors.homePage.mainTexts};
+    }
+  }
 `;
 
 export const HeaderContainer = styled.header`
@@ -94,4 +110,17 @@ export const FooterContainer = styled.footer`
     align-items: center;
     gap: 6.4rem;
   }
+`;
+
+export const FailedToFetch = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.redorange[500]};
+
+  min-height: 25rem;
 `;
