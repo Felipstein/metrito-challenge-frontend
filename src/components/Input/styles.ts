@@ -32,7 +32,7 @@ export const InputStyled = styled.input`
   }
 
   &:focus {
-    border-color: ${({ theme }) => theme.colors.gray[400]};
+    border-color: ${({ theme }) => theme.anatomy.colors.input.inputBorderFocused};
   }
 
   &[type='number']::-webkit-inner-spin-button,
