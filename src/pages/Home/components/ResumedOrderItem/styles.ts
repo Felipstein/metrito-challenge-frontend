@@ -9,6 +9,10 @@ export const Container = styled.li`
 
   cursor: pointer;
 
+  & > * {
+    flex: 1;
+  }
+
   & + & {
     border-top: 1px solid ${({ theme }) => theme.anatomy.colors.homePage.itemsSeparator};
   }
@@ -53,4 +57,5 @@ export const Container = styled.li`
       }
     }
   }
+
 `;

@@ -1,3 +1,6 @@
+import { PaymentType } from './PaymentType';
+import { TransactionStatus } from './TransactionStatus';
+
 export interface ResumedOrder {
   identification: {
     data_source: string;
@@ -6,10 +9,10 @@ export interface ResumedOrder {
   transaction: {
     id: string;
     created_date: string;
-    status: string;
+    status: TransactionStatus;
     value: number;
     currency_code: string;
-    payment_type: string;
+    payment_type: PaymentType;
   };
   product: {
     id: number;
