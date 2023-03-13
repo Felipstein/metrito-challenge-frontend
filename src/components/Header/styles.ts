@@ -16,14 +16,36 @@ export const HeaderContainer = styled.header`
   }
 `;
 
+export const MenuButton = styled.button`
+  display: none;
+`;
+
 export const NavBar = styled.nav`
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 0.8rem;
+  justify-content: center;
+
+  .links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+  }
 
   padding: 0.8rem;
   height: 5.2rem;
 
   background-color: ${({ theme }) => theme.anatomy.colors.header.navBar};
+
+  @media screen and (max-width: 542px) {
+    justify-content: flex-end;
+
+    .links {
+      display: none;
+    }
+
+    ${MenuButton} {
+      display: block;
+    }
+  }
 `;

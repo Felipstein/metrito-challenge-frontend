@@ -53,6 +53,10 @@ export const HeaderContainer = styled.header`
       width: 20rem;
     }
   }
+
+  @media screen and (max-width: 728px) {
+    flex-direction: column;
+  }
 `;
 
 export const ResumedOrderItensContainer = styled.div`

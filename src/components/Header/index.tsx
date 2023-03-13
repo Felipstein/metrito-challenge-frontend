@@ -1,6 +1,7 @@
 import React from 'react';
 import { LinkButton } from '../LinkButton';
 import { ToggleThemeButton } from '../ToggleThemeButton';
+import { Menu } from './Menu';
 
 import * as S from './styles';
 
@@ -15,21 +16,29 @@ export const Header: React.FC = () => {
       </div>
 
       <S.NavBar>
-        <LinkButton to='https://github.com/Felipstein/metrito-challenge-backend'>
-          Repositório API
-        </LinkButton>
+        <div className="links">
+          <LinkButton to='https://github.com/Felipstein/metrito-challenge-backend'>
+            Repositório API
+          </LinkButton>
 
-        <LinkButton to='https://github.com/Felipstein/metrito-challenge-frontend'>
-          Repositório Web
-        </LinkButton>
+          <LinkButton to='https://github.com/Felipstein/metrito-challenge-frontend'>
+            Repositório Web
+          </LinkButton>
 
-        <LinkButton to='https://www.figma.com/file/BjgpVRRLVhYN3tmw5sxux6/Metrito-Challenge-Layout?node-id=3%3A3306&t=Y2L8szlhTXWWbzJH-1'>
-          Projeto no Figma
-        </LinkButton>
+          <LinkButton to='https://www.figma.com/file/BjgpVRRLVhYN3tmw5sxux6/Metrito-Challenge-Layout?node-id=3%3A3306&t=Y2L8szlhTXWWbzJH-1'>
+            Projeto no Figma
+          </LinkButton>
 
-        <LinkButton to='https://metrito-challenge-api.onrender.com/api-docs'>
-          Doc da API
-        </LinkButton>
+          <LinkButton to='https://metrito-challenge-api.onrender.com/api-docs'>
+            Doc da API
+          </LinkButton>
+        </div>
+
+        <Menu>
+          <S.MenuButton>
+            Abrir menu
+          </S.MenuButton>
+        </Menu>
       </S.NavBar>
     </S.HeaderContainer>
   );

@@ -11,8 +11,6 @@ import { ResumedOrderItemProps } from './types';
 import * as S from './styles';
 
 export const ResumedOrderItem: React.FC<ResumedOrderItemProps> = ({ resumedOrderData }) => {
-  console.log(resumedOrderData);
-
   return (
     <S.Container>
       <div className="main-infos">

@@ -12,6 +12,10 @@ export default createGlobalStyle`
     font-size: 62.5%;
 
     min-height: 100vh;
+
+    @media screen and (max-width: 1024px) {
+      font-size: 50%;
+    }
   }
 
   body {
