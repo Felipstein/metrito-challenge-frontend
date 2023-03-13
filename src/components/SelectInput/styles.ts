@@ -1,20 +1,20 @@
 import styled from 'styled-components';
 
-export const InputContainer = styled.div`
+export const SelectContainer = styled.div`
   display: flex;
   flex-direction: column;
 
   width: 100%;
 `;
 
-export const InputLabel = styled.label<{ small: boolean }>`
+export const SelectLabel = styled.label`
   color: ${({ theme }) => theme.anatomy.colors.input.label};
   font-weight: 600;
 
-  font-size: ${({ theme, small }) => small ? theme.typograph.size.xsm : theme.typograph.size.md};
+  font-size: ${({ theme }) => theme.typograph.size.md};
 `;
 
-export const InputStyled = styled.input`
+export const SelectStyled = styled.select`
   color: ${({ theme }) => theme.anatomy.colors.input.text};
   background-color: ${({ theme }) => theme.anatomy.colors.input.background};
   border: 1.5px solid ${({ theme }) => theme.anatomy.colors.input.inputBorder};
@@ -26,6 +26,12 @@ export const InputStyled = styled.input`
   outline: none;
 
   transition: border-color ${({ theme }) => theme.animations.sh} ease-in-out;
+
+  font-family: ${({ theme }) => theme.typograph.fontFamily};
+
+  & option {
+    background-color: ${({ theme }) => theme.anatomy.colors.input.background};
+  }
 
   &::placeholder {
     color: ${({ theme }) => theme.anatomy.colors.input.placeholder};

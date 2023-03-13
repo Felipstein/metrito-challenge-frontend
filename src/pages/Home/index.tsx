@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Input } from '../../components/Input';
+import { SelectInput } from '../../components/SelectInput';
 import { Tag } from '../../components/Tag';
 import { TransactionTag } from '../../types/TransactionTag';
 import { StringUtils } from '../../utils/StringUtils';
@@ -95,17 +96,23 @@ export const Home: React.FC = () => {
 
         <div className="filters">
           <div className="filter-group">
-            <Input
+            <SelectInput
               name='transaction-status'
-              type="text"
               label='Status da Transação'
-            />
+            >
+              <option>Teste</option>
+              <option>2</option>
+              <option>3</option>
+            </SelectInput>
 
-            <Input
+            <SelectInput
               name='payment-type'
-              type="text"
               label='Tipo de Pagamento'
-            />
+            >
+              <option>Teste</option>
+              <option>2</option>
+              <option>3</option>
+            </SelectInput>
           </div>
 
           <div className="filter-group">
