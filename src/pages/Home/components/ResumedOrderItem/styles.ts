@@ -79,3 +79,30 @@ export const Container = styled.li`
   }
 
 `;
+
+export const UserInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.8rem;
+
+  .user-info-title {
+    font-weight: 500;
+    color: ${({ theme }) => theme.anatomy.colors.homePage.mainTexts};
+
+    text-align: center;
+  }
+
+  .user-info-content {
+    font-weight: 600;
+    color: ${({ theme }) => theme.anatomy.colors.homePage.darkTexts};
+
+    text-align: center;
+
+    &.strong {
+      font-weight: 700;
+    }
+  }
+`;

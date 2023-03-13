@@ -34,35 +34,35 @@ export const ResumedOrderItem: React.FC<ResumedOrderItemProps> = ({ resumedOrder
         </Text>
       </div>
 
-      <div className="block-info">
-        <Text className='title' size='xsm'>
+      <S.UserInfo>
+        <Text className='user-info-title' size='xsm'>
           Produto
         </Text>
 
-        <Text className='content strong' size='lg'>
+        <Text className='user-info-content strong' size='lg'>
           {resumedOrderData.product?.name}
         </Text>
-      </div>
+      </S.UserInfo>
 
-      <div className="block-info">
-        <Text className='title' size='xsm'>
+      <S.UserInfo>
+        <Text className='user-info-title' size='xsm'>
           Produtor
         </Text>
 
-        <Text className='content' size='md'>
+        <Text className='user-info-content' size='md'>
           {resumedOrderData.producer?.name}
         </Text>
-      </div>
+      </S.UserInfo>
 
-      <div className="block-info">
-        <Text className='title' size='xsm'>
+      <S.UserInfo>
+        <Text className='user-info-title' size='xsm'>
           Cliente/comprador
         </Text>
 
-        <Text className='content' size='md'>
+        <Text className='user-info-content' size='md'>
           {resumedOrderData.customer?.name}
         </Text>
-      </div>
+      </S.UserInfo>
 
       <div className="payment-info">
         <div className="transaction-status">
