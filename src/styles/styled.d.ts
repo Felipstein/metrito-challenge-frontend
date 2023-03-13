@@ -114,7 +114,7 @@ declare module 'styled-components' {
           inputBorder: string;
           placeholder: string;
           background: string;
-
+          text: string;
           danger: string;
         }
 
