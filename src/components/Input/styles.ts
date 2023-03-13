@@ -34,4 +34,8 @@ export const InputStyled = styled.input`
   &:focus {
     border-color: ${({ theme }) => theme.anatomy.colors.input.inputBorderFocused};
   }
+
+  &[type='date'] {
+    font-family: ${({ theme }) => theme.typograph.fontFamily};
+  }
 `;

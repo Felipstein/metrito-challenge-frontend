@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Input } from '../../components/Input';
 import { SelectInput } from '../../components/SelectInput';
 import { Tag } from '../../components/Tag';
+import { Order } from '../../types/Order';
 import { TransactionTag } from '../../types/TransactionTag';
 import { StringUtils } from '../../utils/StringUtils';
 
@@ -13,7 +14,12 @@ export const Home: React.FC = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
+  const [orders, setOrders] = useState<Order[]>([]);
+
   const [transactionTags, setTransactionTags] = useState<TransactionTag[]>([
+    { total: 25, status: 'APROVADA' },
+    { total: 5, status: 'NEGADA' },
+    { total: 1, status: 'BLOQUEADA' },
     { total: 25, status: 'APROVADA' },
     { total: 5, status: 'NEGADA' },
     { total: 1, status: 'BLOQUEADA' },
@@ -100,7 +106,7 @@ export const Home: React.FC = () => {
               name='transaction-status'
               label='Status da Transação'
             >
-              <option>Teste</option>
+              <option>Todos</option>
               <option>2</option>
               <option>3</option>
             </SelectInput>
@@ -136,6 +142,36 @@ export const Home: React.FC = () => {
           </div>
         </div>
       </S.HeaderContainer>
+
+      <S.FooterContainer>
+        <div className="pagination-info">
+          <div className="products-info">
+            <span>
+              Exibindo <strong>25</strong> produtos de <strong>95</strong>.
+            </span>
+          </div>
+
+          <div className="pages-info">
+            <span>
+              Página <strong>1</strong> de <strong>4</strong>.
+            </span>
+          </div>
+        </div>
+
+        <div className="pagination-actions">
+          <button
+            type='button'
+          >
+            {'<'}
+          </button>
+
+          <button
+            type='button'
+          >
+            {'>'}
+          </button>
+        </div>
+      </S.FooterContainer>
     </S.Container>
   );
 };

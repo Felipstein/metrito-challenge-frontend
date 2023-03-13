@@ -54,3 +54,28 @@ export const HeaderContainer = styled.header`
     }
   }
 `;
+
+export const FooterContainer = styled.footer`
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin: 0.8rem 0;
+
+  span {
+    font-weight: 500;
+
+    strong {
+      font-weight: 600;
+      color: ${({ theme }) => theme.anatomy.colors.homePage.blueTexts};
+    }
+  }
+
+  .pagination-info {
+    display: flex;
+    align-items: center;
+    gap: 6.4rem;
+  }
+`;
