@@ -4,7 +4,7 @@ import { SelectInput } from '../../components/SelectInput';
 import { Tag } from '../../components/Tag';
 import { ResumedOrder } from '../../types/ResumedOrder';
 import { ResumedOrdersResonse } from '../../types/ResumedOrdersResponse';
-import { TransactionStatus } from '../../types/TransactionStatus';
+import { TransactionStatus, transactionStatusLabel } from '../../types/TransactionStatus';
 import { TransactionTag } from '../../types/TransactionTag';
 import { StringUtils } from '../../utils/StringUtils';
 import { ResumedOrderItem } from './components/ResumedOrderItem';
@@ -38,7 +38,7 @@ export const Home: React.FC = () => {
     const transactionTags: TransactionTag[] = [];
 
     transactionsStatusTotal.forEach((key, value) => {
-      transactionTags.push({ total: key, status: value });
+      transactionTags.push({ total: key, status: transactionStatusLabel[value] });
     });
 
     return transactionTags;
