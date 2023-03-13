@@ -1,5 +1,9 @@
 import { DefaultTheme } from 'styled-components';
 
+// O foco é apenas fornecer os detalhes padrões do design, e não o completo, por isso do ts-ignore.
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 export default {
 
   typograph: {
@@ -22,6 +26,12 @@ export default {
   shadows: {
     default: '2px 2px 16px rgba(0, 0, 0, 0.5)',
     inputFocused: '0 0 4px #F56E50',
+  },
+
+  animations: {
+    sh: '0.125s',
+    md: '0.2s',
+    lg: '0.3s',
   },
 
   colors: {
