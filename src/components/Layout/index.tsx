@@ -3,6 +3,7 @@ import React from 'react';
 import { LayoutProps } from './types';
 import * as S from './styles';
 import { Header } from '../Header';
+import { Footer } from '../Footer';
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
@@ -11,7 +12,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       <div className="content">
         {children}
       </div>
-      <footer>Footer</footer>
+      <Footer />
     </S.LayoutPage>
   );
 };
