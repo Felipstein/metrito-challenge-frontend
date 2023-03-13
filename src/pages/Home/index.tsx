@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Input } from '../../components/Input';
 import { Tag } from '../../components/Tag';
+import { TransactionTag } from '../../types/TransactionTag';
 
 import * as S from './styles';
 
 export const Home: React.FC = () => {
+  const [transactionTags, setTransactionTags] = useState<TransactionTag[]>([
+    { total: 25, status: 'APROVADA' },
+    { total: 5, status: 'NEGADA' },
+    { total: 1, status: 'BLOQUEADA' }
+  ]);
+
   return (
     <S.Container>
       <S.HeaderContainer>
@@ -28,11 +35,12 @@ export const Home: React.FC = () => {
           </div>
 
           <div className="tags">
-            <Tag text='25 Com transação APROVADA' />
-            <Tag text='25 Com transação APROVADA' />
-            <Tag text='25 Com transação APROVADA' />
-            <Tag text='25 Com transação APROVADA' />
-            <Tag text='25 Com transação APROVADA' />
+            {transactionTags.map(transactionTag => (
+              <Tag
+                key={Math.random()}
+                text={`${transactionTag.total} transaç${transactionTag.total > 1 ? 'ões' : 'ão'} ${transactionTag.status}`}
+              />
+            ))}
           </div>
         </div>
 
