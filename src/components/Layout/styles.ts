@@ -16,6 +16,5 @@ export const LayoutPage = styled.div`
     width: 84vw;
 
     height: 80%;
-    max-height: 144rem;
   }
 `;

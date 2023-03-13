@@ -5,6 +5,18 @@ export const Container = styled.li`
   align-items: center;
   justify-content: space-between;
 
+  padding: 1.2rem 1.6rem;
+
+  cursor: pointer;
+
+  & + & {
+    border-top: 1px solid ${({ theme }) => theme.anatomy.colors.homePage.itemsSeparator};
+  }
+
+  &:hover {
+    background-color: ${({ theme }) => theme.anatomy.colors.homePage.hoveredBackgroundItem};
+  }
+
   .main-infos {
     display: flex;
     flex-direction: column;

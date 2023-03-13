@@ -27,6 +27,8 @@ export const CurrentThemeProvider: React.FC<CurrentThemeProviderProps> = ({ chil
    */
   function toggleTheme() {
     setCurrentTheme(prevState => prevState === 'light' ? 'dark' : 'light');
+
+    console.log(themes[currentTheme].anatomy.colors.homePage.itemsSeparator);
   }
 
   return (

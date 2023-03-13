@@ -69,6 +69,7 @@ export default {
         lightTexts: gray[200],
         mainTexts: gray[200],
         darkTexts: gray[50],
+        itemsSeparator: gray[600],
       },
 
       orderInfoPage: {

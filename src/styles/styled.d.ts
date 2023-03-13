@@ -146,6 +146,7 @@ declare module 'styled-components' {
           darkTexts: string;
           blueTexts: string;
           hoveredBackgroundItem: string;
+          itemsSeparator: string;
         }
 
         orderInfoPage: {
