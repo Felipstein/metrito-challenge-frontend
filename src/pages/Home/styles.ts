@@ -55,9 +55,13 @@ export const HeaderContainer = styled.header`
   }
 `;
 
-export const ResumedOrderItensContainer = styled.div``;
+export const ResumedOrderItensContainer = styled.div`
+  padding: 1.2rem 0;
+`;
 
-export const ResumedOrderItensList = styled.ul``;
+export const ResumedOrderItensList = styled.ul`
+  list-style: none;
+`;
 
 export const FooterContainer = styled.footer`
   width: 100%;
