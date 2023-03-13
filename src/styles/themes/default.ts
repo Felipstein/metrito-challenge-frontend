@@ -10,10 +10,10 @@ export default {
     fontFamily: 'Nunito, sans-serif',
 
     size: {
-      lg: '1.6rem',
-      md: '1.4rem',
-      sm: '1.2rem',
-      xsm: '1.0rem',
+      lg: '1.8rem',
+      md: '1.6rem',
+      sm: '1.4rem',
+      xsm: '1.2rem',
     },
 
     heading: {

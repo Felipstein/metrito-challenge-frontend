@@ -23,6 +23,8 @@ export const SelectStyled = styled.select`
   font-weight: 500;
   padding: 0.8rem 1.2rem;
 
+  font-size: ${({ theme }) => theme.typograph.size.md};
+
   outline: none;
 
   transition: border-color ${({ theme }) => theme.animations.sh} ease-in-out;
