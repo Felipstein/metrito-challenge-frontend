@@ -1,7 +1,6 @@
 import React from 'react';
 import { LinkButton } from '../LinkButton';
 import { ToggleThemeButton } from '../ToggleThemeButton';
-import { Menu } from './Menu';
 
 import * as S from './styles';
 
@@ -33,12 +32,6 @@ export const Header: React.FC = () => {
             Doc da API
           </LinkButton>
         </div>
-
-        <Menu>
-          <S.MenuButton>
-            Abrir menu
-          </S.MenuButton>
-        </Menu>
       </S.NavBar>
     </S.HeaderContainer>
   );

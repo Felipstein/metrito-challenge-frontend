@@ -16,10 +16,6 @@ export const HeaderContainer = styled.header`
   }
 `;
 
-export const MenuButton = styled.button`
-  display: none;
-`;
-
 export const NavBar = styled.nav`
   display: flex;
   align-items: center;
@@ -36,16 +32,4 @@ export const NavBar = styled.nav`
   height: 5.2rem;
 
   background-color: ${({ theme }) => theme.anatomy.colors.header.navBar};
-
-  @media screen and (max-width: 542px) {
-    justify-content: flex-end;
-
-    .links {
-      display: none;
-    }
-
-    ${MenuButton} {
-      display: block;
-    }
-  }
 `;

@@ -26,6 +26,10 @@ export const HeaderContainer = styled.header`
     .search-input {
       max-width: 60%;
       min-width: 20rem;
+
+      @media screen and (max-width: 728px) {
+        max-width: 100%;
+      }
     }
 
     .max-results-input {
