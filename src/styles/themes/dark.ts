@@ -83,7 +83,8 @@ export default {
       input: {
         label: gray[100],
         background: softblue[800],
-        inputBorder: gray[200],
+        inputBorder: softblue[550],
+        inputBorderFocused: softblue[500],
         placeholder: gray[400],
         danger: redorange[500],
         text: gray[50],

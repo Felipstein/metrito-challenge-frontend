@@ -84,6 +84,7 @@ export default {
         label: gray[600],
         background: 'transparent',
         inputBorder: gray[200],
+        inputBorderFocused: gray[400],
         placeholder: gray[200],
         danger: redorange[500],
         text: gray[600],

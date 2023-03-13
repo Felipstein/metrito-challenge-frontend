@@ -112,6 +112,7 @@ declare module 'styled-components' {
         input: {
           label: string;
           inputBorder: string;
+          inputBorderFocused: string;
           placeholder: string;
           background: string;
           text: string;
