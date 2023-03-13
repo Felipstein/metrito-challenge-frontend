@@ -59,13 +59,39 @@ export const PanelContainer = styled.div`
   flex-direction: column;
   gap: 1.6rem;
 
+  background-color: ${({ theme }) => theme.anatomy.colors.orderInfoPage.panelBackground};
+
+  padding: 1.6rem;
+  border-radius: 8px;
+
   .line-infos {
     display: flex;
     align-items: flex-start;
     flex-wrap: wrap;
     gap: 1.6rem;
 
+    .transaction-info {
+      width: 30rem;
+
+      .main-infos {
+        display: flex;
+        align-items: center;
+        gap: 1.6rem;
+
+        .price-info-transaction {
+          font-weight: 700;
+          color: ${({ theme }) => theme.anatomy.colors.orderInfoPage.mainTexts}
+        }
+      }
+    }
+
     .order-block-info {
+      width: 30rem;
+      background-color: ${({ theme }) => theme.anatomy.colors.orderInfoPage.blockInfoBackground};
+      padding: 0.8rem;
+
+      border-radius: 8px;
+
       display: flex;
       flex-direction: column;
       gap: 1.8rem;

@@ -3,11 +3,14 @@ import { Link, useParams } from 'react-router-dom';
 import { FadeLoader } from 'react-spinners';
 import { useTheme } from 'styled-components';
 import { Button } from '../../components/Button';
+import { TagStatus } from '../../components/TagStatus';
 
 import { Text } from '../../components/Text';
 import { useFetchData } from '../../hooks/useFetchData';
 import { SadIcon } from '../../icons/SadIcon';
 import { Order } from '../../types/Order';
+import { paymentTypeLabel } from '../../types/PaymentType';
+import { transactionStatusColor, transactionStatusLabel } from '../../types/TransactionStatus';
 import { formatCurrency } from '../../utils/FormatCurrency';
 
 import * as S from './styles';
@@ -59,8 +62,62 @@ export const OrderInfo: React.FC = () => {
 
           <S.PanelContainer>
             <div className="line-infos">
-              <div className="transaction-info">
+              <div className="order-block-info transaction-info">
+                <Text className='order-block-info-title'>
+                  Dados da Transação
+                </Text>
 
+                <div className="main-infos">
+                  <TagStatus
+                    color={transactionStatusColor[order.transaction.status]}
+                    text={transactionStatusLabel[order.transaction.status]}
+                  />
+
+                  <Text size='sm' className='price-info-transaction'>
+                    {formatCurrency(order.transaction.value, order.transaction.currency_code)}
+                  </Text>
+
+                  <TagStatus
+                    color='cyan'
+                    text={paymentTypeLabel[order.transaction.payment_type]}
+                  />
+                </div>
+
+                <div className="datas">
+                  <div className="data-info">
+                    <Text size='xsm' className='order-info-data-title'>
+                      Data da criação:
+                    </Text>
+
+                    <Text size='sm' className='order-info-data-value'>
+                      {order.transaction.created_date}
+                    </Text>
+
+                    <Text size='xsm' className='order-info-data-title'>
+                      Desconto:
+                    </Text>
+
+                    <Text size='sm' className='order-info-data-value'>
+                      {formatCurrency(Number(order.transaction.discount_value ?? 0), order.transaction.currency_code)}
+                    </Text>
+
+                    <Text size='xsm' className='order-info-data-title'>
+                      Frete:
+                    </Text>
+
+                    <Text size='sm' className='order-info-data-value'>
+                      {formatCurrency(Number(order.transaction.freight ?? 0), order.transaction.currency_code)}
+                    </Text>
+
+                    <Text size='xsm' className='order-info-data-title'>
+                      Tipo de Frete:
+                    </Text>
+
+                    <Text size='sm' className='order-info-data-value'>
+                      {order.transaction.freight_type || 'Não específicado'}
+                    </Text>
+                  </div>
+                </div>
               </div>
 
               <div className="order-block-info product">
