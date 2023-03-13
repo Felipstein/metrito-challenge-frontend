@@ -70,6 +70,53 @@ declare module 'styled-components' {
         50: string;
         600: string;
       };
+
+      // Cores relacionadas à anatomia do Design System. São valores que podem ser alterados na troca entre o tema Light e o Dark.
+      anatomy: {
+        primary: {
+          lighter: string;
+          light: string;
+          main: string
+          dark: string;
+          darker: string;
+        };
+
+        danger: {
+          main: string;
+          lighter: string;
+        };
+
+        green: {
+          main: string;
+          lighter: string;
+        };
+
+        cyan: {
+          main: string;
+          ligher: string;
+        };
+
+        gray: {
+          lighter: string;
+          light: string;
+          main: string;
+          dark: string;
+          darker: string;
+          darkerx: string;
+        };
+
+        softblue: {
+          ligher: string;
+          light: string;
+          prelight: string;
+          main: string;
+          premain: string;
+          dark: string;
+          darkx: string;
+          darker: string;
+          darkerx: string;
+        }
+      }
     };
 
   }
