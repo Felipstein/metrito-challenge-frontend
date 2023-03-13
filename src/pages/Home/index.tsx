@@ -9,6 +9,8 @@ import * as S from './styles';
 export const Home: React.FC = () => {
   const [search, setSearch] = useState('');
   const [maxPerPage, setMaxPerPage] = useState(25);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
 
   const [transactionTags, setTransactionTags] = useState<TransactionTag[]>([
     { total: 25, status: 'APROVADA' },
@@ -32,6 +34,28 @@ export const Home: React.FC = () => {
     }
 
     setMaxPerPage(maxPerPage);
+  }
+
+  function handleStartDateChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const value = event.target.value;
+
+    const [year, month, day] = value.split('-');
+
+    // Como o input date trás a numeração dos meses de 0 a 11, aqui é abstraido os valores e incrementado + 1 para o valor do mês, e, por fim, adicionado um 0 a esquerda caso necessário.
+    const correctDateValue = `${year}-${(Number(month) + 1).toString().padStart(2, '0')}-${day}`;
+
+    setStartDate(correctDateValue);
+  }
+
+  function handleEndDateChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const value = event.target.value;
+
+    const [year, month, day] = value.split('-');
+
+    // Como o input date trás a numeração dos meses de 0 a 11, aqui é abstraido os valores e incrementado + 1 para o valor do mês, e, por fim, adicionado um 0 a esquerda caso necessário.
+    const correctDateValue = `${year}-${(Number(month) + 1).toString().padStart(2, '0')}-${day}`;
+
+    setEndDate(correctDateValue);
   }
 
   return (
@@ -87,16 +111,20 @@ export const Home: React.FC = () => {
           <div className="filter-group">
             <Input
               name='start-date'
-              type="text"
+              type="date"
               label='Depois de'
               placeholder='dd/mm/aaaa'
+              value={startDate}
+              onChange={handleStartDateChange}
             />
 
             <Input
               name='end-date'
-              type="text"
+              type="date"
               label='Antes de'
               placeholder='dd/mm/aaaa'
+              value={endDate}
+              onChange={handleEndDateChange}
             />
           </div>
         </div>
