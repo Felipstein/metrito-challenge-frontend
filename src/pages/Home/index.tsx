@@ -1,6 +1,4 @@
 import React, { useMemo, useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import { Navigate, NavigationType } from 'react-router-dom';
 import FadeLoader from 'react-spinners/FadeLoader';
 import { useTheme } from 'styled-components';
 
