@@ -72,15 +72,15 @@ export const ResumedOrderItem: React.FC<ResumedOrderItemProps> = ({ resumedOrder
           />
         </div>
 
-        <div className="payment-info">
+        <div className="payment-type-and-value">
           <Text size='lg'>
-            {resumedOrderData.transaction.currency_code}
-            {resumedOrderData.transaction.value}
+            {Intl.NumberFormat('pt-br', { style: 'currency', currency: resumedOrderData.transaction.currency_code }).format(resumedOrderData.transaction.value)}
           </Text>
 
           <TagStatus
             text={paymentTypeLabel[resumedOrderData.transaction.payment_type]}
             color='cyan'
+            small
           />
         </div>
       </div>

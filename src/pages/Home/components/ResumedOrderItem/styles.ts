@@ -58,4 +58,24 @@ export const Container = styled.li`
     }
   }
 
+  .payment-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 0.8rem;
+
+    .payment-type-and-value {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      gap: 0.2rem;
+
+      span {
+        font-weight: 700;
+      }
+    }
+  }
+
 `;

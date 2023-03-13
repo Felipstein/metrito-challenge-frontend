@@ -19,13 +19,14 @@ const colors: Record<TagStatusColor, any> = {
   `,
 };
 
-export const Container = styled.span<{ color: TagStatusColor }>`
+export const Container = styled.span<{ color: TagStatusColor, small: boolean }>`
   display: inline-block;
 
-  padding: 0.4rem 0.6rem;
+  padding: ${({ small }) => small ? '0.2rem 0.4rem' : '0.4rem 0.6rem'};
+
   border-radius: 16px;
 
-  font-size: ${({ theme }) => theme.typograph.size.sm};
+  font-size: ${({ theme, small }) => small ? theme.typograph.size.xsm : theme.typograph.size.sm};
 
   ${({ color }) => colors[color] || colors.green}
 
