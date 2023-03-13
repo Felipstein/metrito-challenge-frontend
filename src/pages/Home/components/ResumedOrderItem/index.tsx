@@ -43,9 +43,15 @@ export const ResumedOrderItem: React.FC<ResumedOrderItemProps> = ({ resumedOrder
           Produto
         </Text>
 
-        <Text className='user-info-content strong' size='lg'>
-          {resumedOrderData.product?.name}
-        </Text>
+        {resumedOrderData.product ? (
+          <Text className='user-info-content strong' size='lg'>
+            {resumedOrderData.product.name}
+          </Text>
+        ) : (
+          <S.NoInfoAbount>
+            Nenhuma informação sobre Produto encontrada
+          </S.NoInfoAbount>
+        )}
       </S.UserInfo>
 
       <S.UserInfo>
@@ -53,9 +59,15 @@ export const ResumedOrderItem: React.FC<ResumedOrderItemProps> = ({ resumedOrder
           Produtor
         </Text>
 
-        <Text className='user-info-content' size='md'>
-          {resumedOrderData.producer?.name}
-        </Text>
+        {resumedOrderData.producer ? (
+          <Text className='user-info-content' size='md'>
+            {resumedOrderData.producer.name}
+          </Text>
+        ) : (
+          <S.NoInfoAbount>
+            Nenhuma informação sobre o Produtor encontrada
+          </S.NoInfoAbount>
+        )}
       </S.UserInfo>
 
       <S.UserInfo>
@@ -63,9 +75,15 @@ export const ResumedOrderItem: React.FC<ResumedOrderItemProps> = ({ resumedOrder
           Cliente/comprador
         </Text>
 
-        <Text className='user-info-content' size='md'>
-          {resumedOrderData.customer?.name}
-        </Text>
+        {resumedOrderData.customer ? (
+          <Text className='user-info-content' size='md'>
+            {resumedOrderData.customer.name}
+          </Text>
+        ) : (
+          <S.NoInfoAbount>
+            Nenhuma informação sobre o Cliente/comprador encontrada
+          </S.NoInfoAbount>
+        )}
       </S.UserInfo>
 
       <div className="payment-info">

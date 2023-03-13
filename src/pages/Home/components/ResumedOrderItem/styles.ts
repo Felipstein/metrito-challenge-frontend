@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Text } from '../../../../components/Text';
 
 export const Container = styled.li`
   display: flex;
@@ -105,4 +106,11 @@ export const UserInfo = styled.div`
       font-weight: 700;
     }
   }
+`;
+
+export const NoInfoAbount = styled(Text).attrs({ size: 'sm' })`
+  color: ${({ theme }) => theme.colors.redorange[500]};
+  font-weight: 600;
+
+  text-align: center;
 `;
