@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Input } from '../../components/Input';
 import { SelectInput } from '../../components/SelectInput';
 import { Tag } from '../../components/Tag';
 import { ResumedOrder } from '../../types/ResumedOrder';
 import { ResumedOrdersResonse } from '../../types/ResumedOrdersResponse';
+import { TransactionStatus } from '../../types/TransactionStatus';
 import { TransactionTag } from '../../types/TransactionTag';
 import { StringUtils } from '../../utils/StringUtils';
 import { ResumedOrderItem } from './components/ResumedOrderItem';
@@ -17,6 +18,31 @@ export const Home: React.FC = () => {
   const [endDate, setEndDate] = useState('2021-05-30');
 
   const [resumedOrders, setResumedOrders] = useState<ResumedOrder[]>([]);
+
+  // Atualiza as tags de transações conforme os pedidos forem atualizando também.
+  const transactionTags = useMemo<TransactionTag[]>(() => {
+
+    const transactionsStatusTotal = new Map<TransactionStatus, number>();
+
+    // Percorre pedido por pedido para popular o total de cada status de transação
+    resumedOrders.forEach((resumedOrder) => {
+      const status = resumedOrder.transaction.status as TransactionStatus;
+
+      // Verifica se já possui uma quantidade de transações de tal status. Caso não tiver, comece com 1, e caso tiver, acrescente + 1.
+      const total = transactionsStatusTotal.get(status) === undefined ? 1 : transactionsStatusTotal.get(status)! + 1;
+
+      transactionsStatusTotal.set(status, total);
+    });
+
+    // Transforma o Map de STATUS: TOTAL em uma lista de TransactionTag
+    const transactionTags: TransactionTag[] = [];
+
+    transactionsStatusTotal.forEach((key, value) => {
+      transactionTags.push({ total: key, status: value });
+    });
+
+    return transactionTags;
+  }, [resumedOrders]);
 
   useEffect(() => {
     async function fetchData() {
@@ -34,15 +60,6 @@ export const Home: React.FC = () => {
     fetchData();
 
   }, []);
-
-  const [transactionTags, setTransactionTags] = useState<TransactionTag[]>([
-    { total: 25, status: 'APROVADA' },
-    { total: 5, status: 'NEGADA' },
-    { total: 1, status: 'BLOQUEADA' },
-    { total: 25, status: 'APROVADA' },
-    { total: 5, status: 'NEGADA' },
-    { total: 1, status: 'BLOQUEADA' },
-  ]);
 
   function handleSearchChange(event: React.ChangeEvent<HTMLInputElement>) {
     const value = event.target.value;
