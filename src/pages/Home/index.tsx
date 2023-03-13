@@ -23,11 +23,11 @@ export const Home: React.FC = () => {
   const [startDate, setStartDate] = useState('2021-04-01');
   const [endDate, setEndDate] = useState('2021-05-30');
 
-  const { data, errorFeedback, isFetching } = useFetchData<ResumedOrdersResponse>(`http://localhost:3333/v1/orders?start_date=${startDate}&end_date=${endDate}`);
+  const { data, errorFeedback, isFetching } = useFetchData<ResumedOrdersResponse>(`https://metrito-challenge-api.onrender.com/v1/orders?start_date=${startDate}&end_date=${endDate}`);
 
   const resumedOrders = useMemo(() => data?.data, [data]);
 
-  const resumedOrdersFiltered = useMemo(() => {
+  const resumedOrdersFilte   = useMemo(() => {
     if(!resumedOrders) {
       return [];
     }

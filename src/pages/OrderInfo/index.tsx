@@ -19,7 +19,7 @@ export const OrderInfo: React.FC = () => {
   const theme = useTheme();
   const { orderId } = useParams();
 
-  const { data: order, errorFeedback, isFetching } = useFetchData<Order>(`http://localhost:3333/v1/orders/${orderId}`);
+  const { data: order, errorFeedback, isFetching } = useFetchData<Order>(`https://metrito-challenge-api.onrender.com/v1/orders/${orderId}`);
 
   return (
     <S.Container>
